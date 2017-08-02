@@ -108,6 +108,10 @@ def store_articles(articles):
 def refresh(source):
     articles = fetch_articles(source)
     metadata = []
+    if os.path.exists(make_relative("static")):
+        # print(os.listdir(make_relative("static")))
+        for f in os.listdir(make_relative("static")):
+            os.remove(make_relative("static/" + f.decode('UTF-8')))
     for m in store_articles(articles):
         if m["path"] == None:
             continue
