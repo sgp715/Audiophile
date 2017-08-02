@@ -1,6 +1,7 @@
 # Audiophile
 
 ## Startup server
+* sudo apt-get install virtualenv
 * Manually
   1. clone the repo
   2. cd into the repo and create a virtual environment
@@ -22,6 +23,10 @@
   $ gunicorn -b 127.0.0.1:80 app:app
   ```
 * Run the startup.sh script
+  1. give it permissions to execute
+  ```
+  $ chmod +x start.sh
+  ```
 
 ## Start the scraper
 1. Create a environment variable for the projcet home
