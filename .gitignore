@@ -1,0 +1,6 @@
+*.log
+*.mp3
+__pycache__
+metadata.json
+config.json
+phile/

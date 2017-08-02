@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>AudioPhile</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css"
+    rel="stylesheet" >
+  <body>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h1 class="panel-title">NY Times Audio Feeds</h1>
+      </div>
+      <div class="panel-body">
+        <div class="well well-lg">
+          <div class="list-group">
+            <ul id="playlist">
+            {% for article in articles %}
+              <div>
+                <text>
+                  <a href = {{ article.url }}> {{ article.title }} </a>
+                  <br>
+                  {{ article.author }}
+                </text>
+                <br>
+                <audio controls>
+                  <source src="{{ article.path }}" type="audio/mp3">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+              <br>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <footer>
+          <p>Created by: Sebastian Perez</p>
+          <p>Contact information: <a href="mailto:7sebastianperez@gmail.com">
+          7sebastianperez@gmail.com</a></p>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
