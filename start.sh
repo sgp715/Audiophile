@@ -5,11 +5,10 @@ source phile/bin/activate
 # create the dumby config file
 echo '{"key":"api_key"}' > config.sh
 
-pip3 install -r requirements.txt 
+pip3 install -r requirements.txt
 
 mkdir static
 
 export PHILE_HOME=~/Audiophile
 
-gunicorn app:app
-
+gunicorn -b 127.0.0.1:80 app:app

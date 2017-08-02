@@ -19,7 +19,7 @@
 
   6. start the server
   ```
-  $ gunicorn app:app
+  $ gunicorn -b 127.0.0.1:80 app:app
   ```
 * Run the startup.sh script
 
