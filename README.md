@@ -1,11 +1,6 @@
 # Audiophile
 
-<<<<<<< HEAD
 ## Install
-=======
-## Startup server
-* sudo apt-get install virtualenv
->>>>>>> 6f58d31c34b3217fb7d908b9222827ca6b2548b3
 * Manually
   ### Startup Flask server
     1. clone the repo
@@ -23,7 +18,6 @@
     mkdir static
     ```
 
-<<<<<<< HEAD
     6. start the server
     ```
     $ gunicorn -b 127.0.0.1:80 app:app
@@ -32,17 +26,6 @@
 
   ### Configure Apache
     1. https://www.vioan.eu/blog/2016/10/10/deploy-your-flask-python-app-on-ubuntu-with-apache-gunicorn-and-systemd/
-=======
-  6. start the server
-  ```
-  $ gunicorn -b 127.0.0.1:80 app:app
-  ```
-* Run the startup.sh script
-  1. give it permissions to execute
-  ```
-  $ chmod +x start.sh
-  ```
->>>>>>> 6f58d31c34b3217fb7d908b9222827ca6b2548b3
 
   ### Start the scraper
   1. create the following cronjob by running <code> crontab -e </code>
