@@ -17,8 +17,7 @@ COPY 000-default.conf /etc/apache2/sites-enabled/
 WORKDIR /app
 COPY app /app
 
-RUN echo '{"key":"api_key"}' > config.sh
-RUN touch metadata.json
+RUN echo '{"key":[API_KEY]}' > config.json
 RUN echo "{}" > metadata.json
 
 # start up the gunicorn server
@@ -29,6 +28,10 @@ RUN echo "{}" > metadata.json
 RUN apt-get install python3.5 -y
 RUN apt-get install python3-pip -y
 RUN pip3 install -r requirements.txt
+
+# add the cronjob
+RUN apt-get install cron
+RUN crontab cron
 
 # start flask
 RUN chmod +x start.sh

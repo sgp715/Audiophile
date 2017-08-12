@@ -1,0 +1,1 @@
+0 0 * * * /usr/bin/python3.5 /app/audiophile.py; >> /var/log/audiophile.log 2>&1
