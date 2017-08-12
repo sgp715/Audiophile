@@ -41,26 +41,6 @@ def fetch_articles(source, sort_by = "top"):
     return json.loads(data)["articles"]
 
 def article_body(html):
-    """
-    soup = BeautifulSoup(html, "html.parser")
-    story_body = soup.findAll("p") #, {"class":"story-body-text story-content"})
-    if story_body == None:
-        return []
-    p_dict = {}
-    for p in story_body:
-        parent = p.parent
-        if parent in p_dict:
-            p_dict[parent].append(p)
-        else:
-            p_dict[parent] = [p]
-    paragraphs = []
-    p_len = -1
-    for v in p_dict.values():
-        if len(v) > p_len:
-            paragraphs = v
-            p_len = len(v)
-    return [p.getText() for p in paragraphs]
-    """
     soup = BeautifulSoup(html, "html.parser")
     story_body = soup.findAll("p" , {"class":"story-body-text story-content"})
     if story_body == None:
