@@ -1,6 +1,6 @@
 # Audiophile
 
-## Install
+## Setup
 * Manually
   ### Startup Flask server
     1. clone the repo
@@ -33,7 +33,7 @@
   0 0 * * * [PHILE_HOME]/phile/bin/python3.5 [PHLE_HOME]/audiophile.py
   ```
     * where [PHILE_HOME] is wherever the package was installed
-    
+
 * Docker
   1. Install Docker
   2. To build the docker image
