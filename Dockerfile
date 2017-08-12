@@ -17,7 +17,7 @@ COPY 000-default.conf /etc/apache2/sites-enabled/
 WORKDIR /app
 COPY app /app
 
-RUN echo '{"key":[API_KEY]}' > config.json
+RUN echo '{"key":"[API_KEY]"}' > config.json
 RUN echo "{}" > metadata.json
 
 # start up the gunicorn server
