@@ -1,5 +1,5 @@
 # Audiophile
-If you are like me, sometimes you get tired of staring at the screen. Or if you're like me you sometimes just don't want to read. Well, Audiophile is here to help. It periodically scrapes the New York Times best articles and generates a narration of them. Then all you have to do is click play and you have the sweet sounds of a robotic female voice whispering geopolitical nothings into your ear. You can check out the hosted version or clone this repo and run it locally.
+If you are like me, sometimes you get tired of staring at the screen. Or if you're like me you sometimes just don't want to read. Well, Audiophile is here to help. It periodically scrapes the New York Times best articles and generates a narration of them. Then all you have to do is click play and you have the sweet sounds of a robotic female voice whispering geopolitical nothings into your ear. You can check it out [here](http://ec2-52-15-237-209.us-east-2.compute.amazonaws.com/) or clone this repo and run it locally.
 
 ## Setup
   * Install Docker
@@ -18,3 +18,8 @@ If you are like me, sometimes you get tired of staring at the screen. Or if you'
   ```
   $ docker start/stop phile
   ```
+
+## TODO
+* unit testing
+* logging
+* CI/CD
