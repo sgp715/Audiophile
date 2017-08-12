@@ -33,13 +33,14 @@
   0 0 * * * [PHILE_HOME]/phile/bin/python3.5 [PHLE_HOME]/audiophile.py
   ```
     * where [PHILE_HOME] is wherever the package was installed
-  * Docker
-    1. Install Docker
-    2. To build the docker image
-    ```
-    $ docker build -t audiophile .
-    ```
-    3. To run the a container from the image
-    ```
-    $ docker run --name phile -p 0.0.0.0:[PORT]:80 audiophile -d
-    ```
+    
+* Docker
+  1. Install Docker
+  2. To build the docker image
+  ```
+  $ docker build -t audiophile .
+  ```
+  3. To run the a container from the image
+  ```
+  $ docker run --name phile -p 0.0.0.0:[PORT]:80 audiophile -d
+  ```
