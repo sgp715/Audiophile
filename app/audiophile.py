@@ -96,9 +96,10 @@ def orate_articles(article):
         # logging.info("No story body for: " +  url)
         return {"title":title, "author":author, "url":url, "path":None}
     tts = gTTS(make_plain_text(''.join(body)), lang='en')
-    path = make_relative("static" + '/' + title.split()[0] + '-' + str(uuid.uuid4()) + ".mp3")
-    tts.save(path)
-    size = os.stat(path).st_size
+    path = make_plain_text("static" + '/' + title.split()[0] + '-' + str(uuid.uuid4()) + ".mp3")
+    relative_path = make_relative(path)
+    tts.save(relative_path)
+    size = os.stat(relative_path).st_size
     return {"title":title, "author":author, "url":url, "path":path, "size":size}
 
 def store_articles(articles):
