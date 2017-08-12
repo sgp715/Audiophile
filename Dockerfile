@@ -3,6 +3,7 @@ FROM ubuntu
 
 RUN apt-get update && apt-get install -y
 
+RUN apt-get install nano -y
 
 # install Apache
 RUN apt-get install apache2 -y
@@ -17,7 +18,7 @@ COPY 000-default.conf /etc/apache2/sites-enabled/
 WORKDIR /app
 COPY app /app
 
-RUN echo '{"key":"[API_KEY]"}' > config.json
+RUN echo '{"key":"10d3d179c39948718d579dd04cda0c61"}' > config.json
 RUN echo "{}" > metadata.json
 
 # start up the gunicorn server

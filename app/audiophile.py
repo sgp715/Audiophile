@@ -10,9 +10,14 @@ from multiprocessing.pool import ThreadPool
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+def make_plain_text(s):
+    return s.encode('utf-8').strip().decode("ascii","ignore")
+
 def make_relative(filename):
-    path = '/'.join((dir_path,filename)).encode('utf-8').strip()
+    path = make_plain_text('/'.join((dir_path,filename)))
     return path
+
+STATIC_DIR = make_relative("static")
 
 # logging.basicConfig(make_relative("source.log"),
 #                     filemode='w',
@@ -79,21 +84,20 @@ def article_body(html):
 #                                         content)
 #     logging.info(message)
 
-def orate_articles(article, directory="static"):
+def orate_articles(article):
     title = article["title"]
     author = article["author"]
     url = article["url"]
     # date = article["publishedAt"]
-    if not(os.path.exists(make_relative(directory))):
-        os.mkdir(make_relative(directory))
+    if not(os.path.exists(STATIC_DIR)):
+        os.mkdir(STATIC_DIR)
     body = article_body(requests.get(url).text)
     if len(body) == 0:
         # logging.info("No story body for: " +  url)
         return {"title":title, "author":author, "url":url, "path":None}
-    content = ''.join(body).encode('utf-8').strip()
-    tts = gTTS(text=content.decode('utf-8'), lang='en')
-    path = directory + '/' + title.split()[0] + '-' + str(uuid.uuid4()) + ".mp3"
-    tts.save(make_relative(path))
+    tts = gTTS(make_plain_text(''.join(body)), lang='en')
+    path = make_relative("static" + '/' + title.split()[0] + '-' + str(uuid.uuid4()) + ".mp3")
+    tts.save(path)
     size = os.stat(path).st_size
     return {"title":title, "author":author, "url":url, "path":path, "size":size}
 
@@ -116,8 +120,8 @@ def too_big(size):
 def refresh(source):
     # find the old ones
     oldies = []
-    if os.path.exists(make_relative("static")):
-        for f in os.listdir(make_relative("static")):
+    if os.path.exists(STATIC_DIR):
+        for f in os.listdir(STATIC_DIR):
             oldies.append(f)
     articles = fetch_articles(source)
     metadata = []
@@ -131,7 +135,7 @@ def refresh(source):
         json.dump(metadata, f)
     # delete old ones
     for o in oldies:
-        os.remove(make_relative("static/" + o.decode('UTF-8')))
+        os.remove('/'.join((STATIC_DIR, o)))
 
 
 if __name__ == "__main__":
