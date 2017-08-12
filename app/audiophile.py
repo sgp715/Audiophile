@@ -27,7 +27,8 @@ def fetch_articles(source, sort_by = "top"):
     fetches the json from api
     """
     api_url = "https://newsapi.org/v1/articles?source={source}&sortBy={sort_by}&apiKey={api_key}"
-    r = requests.get(api_url.format(source=source,sort_by=sort_by,api_key=api_key))
+    request_url = api_url.format(source=source,sort_by=sort_by,api_key=api_key)
+    r = requests.get(request_url)
     if r.status_code != 200:
         print("The following error occurred: " + r.text)
         return
@@ -93,7 +94,8 @@ def orate_articles(article, directory="static"):
     tts = gTTS(text=content.decode('utf-8'), lang='en')
     path = directory + '/' + title.split()[0] + '-' + str(uuid.uuid4()) + ".mp3"
     tts.save(make_relative(path))
-    return {"title":title, "author":author, "url":url, "path":path}
+    size = os.stat(path).st_size
+    return {"title":title, "author":author, "url":url, "path":path, "size":size}
 
 def store_articles(articles):
     """
@@ -105,19 +107,31 @@ def store_articles(articles):
     pool.join()
     return results
 
+def too_big(size):
+    int_size = int(size)
+    if int_size > 10000000:
+        return True
+    return False
+
 def refresh(source):
+    # find the old ones
+    oldies = []
+    if os.path.exists(make_relative("static")):
+        for f in os.listdir(make_relative("static")):
+            oldies.append(f)
     articles = fetch_articles(source)
     metadata = []
-    if os.path.exists(make_relative("static")):
-        # print(os.listdir(make_relative("static")))
-        for f in os.listdir(make_relative("static")):
-            os.remove(make_relative("static/" + f.decode('UTF-8')))
     for m in store_articles(articles):
         if m["path"] == None:
+            continue
+        if too_big(m["size"]): # check if the file is really big
             continue
         metadata.append(m)
     with open(make_relative('metadata.json'), 'w') as f:
         json.dump(metadata, f)
+    # delete old ones
+    for o in oldies:
+        os.remove(make_relative("static/" + o.decode('UTF-8')))
 
 
 if __name__ == "__main__":

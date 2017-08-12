@@ -3,6 +3,7 @@ from flask import Flask
 from flask import render_template
 import json
 
+DEBUG = False
 
 app = Flask(__name__)
 
@@ -14,4 +15,7 @@ def playlist():
         return render_template("./playlist.html", articles=articles)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    if DEBUG == True:
+        app.run(debug=True)
+    else:
+        app.run()
